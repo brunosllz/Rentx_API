@@ -15,7 +15,7 @@ class SpecificationsRepository implements ISpecificationsRepository {
       description
     });
 
-    this.repository.save(specification);
+    await this.repository.save(specification);
   }
 
   async list(): Promise<Specifications[]> {

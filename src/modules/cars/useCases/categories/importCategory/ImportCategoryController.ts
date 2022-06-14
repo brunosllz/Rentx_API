@@ -1,12 +1,15 @@
 import { Request, Response } from "express";
-import { ImportCategoryUseCase } from "./ImportCategoryUseCase";
+import { container } from "tsyringe";
 import fs from 'fs';
 
-class ImportCategoryController {
-  constructor(private importCategoryUseCase: ImportCategoryUseCase) { }
+import { ImportCategoryUseCase } from "./ImportCategoryUseCase";
 
-  handle(request: Request, response: Response) {
+class ImportCategoryController {
+
+
+  async handle(request: Request, response: Response) {
     const { file } = request;
+    const importCategoryUseCase = container.resolve(ImportCategoryUseCase);
 
     if (!file) {
       throw new Error('File not found');
@@ -17,7 +20,7 @@ class ImportCategoryController {
       throw new Error('Invalid file type');
     }
 
-    this.importCategoryUseCase.execute(file);
+    await importCategoryUseCase.execute(file);
 
     return response.send();
   }
