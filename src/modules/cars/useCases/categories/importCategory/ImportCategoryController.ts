@@ -3,6 +3,7 @@ import { container } from "tsyringe";
 import fs from 'fs';
 
 import { ImportCategoryUseCase } from "./ImportCategoryUseCase";
+import { AppError } from "../../../../../errors/AppError";
 
 class ImportCategoryController {
 
@@ -12,17 +13,17 @@ class ImportCategoryController {
     const importCategoryUseCase = container.resolve(ImportCategoryUseCase);
 
     if (!file) {
-      throw new Error('File not found');
+      throw new AppError('File not found');
     }
 
     if (!file.mimetype.includes('csv')) {
       fs.promises.unlink(file.path);
-      throw new Error('Invalid file type');
+      throw new AppError('Invalid file type');
     }
 
     await importCategoryUseCase.execute(file);
 
-    return response.send();
+    return response.send(201);
   }
 }
 
