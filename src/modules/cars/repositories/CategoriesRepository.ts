@@ -5,7 +5,7 @@ import { ICategoriesRepository, ICreateCategoryDTO } from "./implementations/ICa
 class CategoriesRepository implements ICategoriesRepository {
   private repositoy: Repository<Category>
 
-  private constructor() {
+  constructor() {
     this.repositoy = getRepository(Category);
   }
 
