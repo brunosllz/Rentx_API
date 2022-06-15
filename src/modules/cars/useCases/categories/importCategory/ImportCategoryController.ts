@@ -6,8 +6,6 @@ import { ImportCategoryUseCase } from "./ImportCategoryUseCase";
 import { AppError } from "../../../../../errors/AppError";
 
 class ImportCategoryController {
-
-
   async handle(request: Request, response: Response) {
     const { file } = request;
     const importCategoryUseCase = container.resolve(ImportCategoryUseCase);
@@ -23,7 +21,7 @@ class ImportCategoryController {
 
     await importCategoryUseCase.execute(file);
 
-    return response.send(201);
+    return response.status(201).send();
   }
 }
 
