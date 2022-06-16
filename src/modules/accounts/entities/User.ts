@@ -10,9 +10,6 @@ class User {
   name: string;
 
   @Column()
-  username: string;
-
-  @Column()
   password: string;
 
   @Column()
@@ -25,7 +22,7 @@ class User {
   isAdmin: boolean;
 
   @Column()
-  avatar: string;
+  avatar: null | string;
 
   @CreateDateColumn()
   created_at: Date;
@@ -33,6 +30,9 @@ class User {
   constructor() {
     if (!this.id) {
       this.id = uuid();
+    }
+    if (!this.avatar) {
+      this.avatar = null;
     }
   }
 }
