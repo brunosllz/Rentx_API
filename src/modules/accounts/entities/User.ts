@@ -22,7 +22,7 @@ class User {
   isAdmin: boolean;
 
   @Column()
-  avatar: null | string;
+  avatar: string;
 
   @CreateDateColumn()
   created_at: Date;
@@ -30,9 +30,6 @@ class User {
   constructor() {
     if (!this.id) {
       this.id = uuid();
-    }
-    if (!this.avatar) {
-      this.avatar = null;
     }
   }
 }
