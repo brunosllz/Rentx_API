@@ -3,6 +3,8 @@ import { inject, injectable } from 'tsyringe';
 import fs from 'fs';
 
 import { ICategoriesRepository } from '../../../repositories/ICategoriesRepository';
+import { AppError } from '../../../../../errors/AppError';
+import { deleteFile } from '../../../../../utils/file';
 
 interface IImportCategory {
   name: string;
@@ -40,6 +42,15 @@ class ImportCategoryUseCase {
   }
 
   async execute(file: Express.Multer.File) {
+    if (!file) {
+      throw new AppError('File not found');
+    }
+
+    if (!file.mimetype.includes('csv')) {
+      deleteFile(file.path)
+      throw new AppError('Invalid file type');
+    }
+
     const categories = await this.loadCategories(file);
 
     categories.map(async category => {

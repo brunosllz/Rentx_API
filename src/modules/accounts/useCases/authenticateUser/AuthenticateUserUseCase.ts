@@ -28,13 +28,13 @@ class AutheticateUserUseCase {
     const user = await this.usersRepository.findByEmail(email);
 
     if (!user) {
-      throw new AppError("Email or password invalid");
+      throw new AppError("Email or password invalid", 401);
     }
 
     const passwordMatched = await compare(password, user.password);
 
     if (!passwordMatched) {
-      throw new AppError("Email or password invalid");
+      throw new AppError("Email or password invalid", 401);
     }
 
     const token = sign({}, '9f18bc74eb221967f53340d607912b5f', {
