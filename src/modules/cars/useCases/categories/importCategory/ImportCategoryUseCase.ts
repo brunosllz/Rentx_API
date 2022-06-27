@@ -3,7 +3,7 @@ import { inject, injectable } from 'tsyringe';
 import fs from 'fs';
 
 import { ICategoriesRepository } from '../../../repositories/ICategoriesRepository';
-import { AppError } from '../../../../../errors/AppError';
+import { AppError } from '../../../../../shared/errors/AppError';
 import { deleteFile } from '../../../../../utils/file';
 
 interface IImportCategory {
