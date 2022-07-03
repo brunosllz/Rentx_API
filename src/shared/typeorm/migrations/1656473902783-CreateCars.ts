@@ -43,7 +43,8 @@ export class CreateCars1656473902783 implements MigrationInterface {
                     },
                     {
                         name: "category_id",
-                        type: "uuid"
+                        type: "uuid",
+                        isNullable: true
                     },
                     {
                         name: "created_at",
@@ -57,7 +58,8 @@ export class CreateCars1656473902783 implements MigrationInterface {
                         referencedTableName: "categories",
                         referencedColumnNames: ["id"],
                         columnNames: ["category_id"],
-
+                        onDelete: "SET NULL",
+                        onUpdate: "SET NULL"
                     }
                 ]
             })
@@ -65,6 +67,7 @@ export class CreateCars1656473902783 implements MigrationInterface {
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
+        queryRunner.dropTable('cars');
     }
 
 }
