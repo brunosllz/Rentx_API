@@ -38,7 +38,6 @@ class Car {
   @CreateDateColumn()
   created_at: Date;
 
-
   constructor() {
     if (!this.id) {
       this.id = uuid();
